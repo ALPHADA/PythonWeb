@@ -57,4 +57,25 @@
 ```
 `<END TAG>`가 오기전에 새로운 `<START TAG>`가 올 수 없다.
 
+### TAG를 다 외워야 하나요?
+
+ HTML은
+약 150개가 넘는 태그가 존재합니다.
+
+ 
+
+ 
+
+그럼 그 많은 태그를 다 외워야 할까요?
+
+https://www.advancedwebranking.com/seo/html-study/
+
+
+아래 그래프는
+전 세계에 있는 웹페이지들이
+몇 종류의 태그로 이루어져 있는지를 보여주고 있습니다.
+
+아래 그래프는 태그별 인기도입니다.
+![스크린샷 2022-06-08 오후 1 50 30](https://user-images.githubusercontent.com/48852104/172534208-f341aa74-e4a3-4bc0-85e8-e72ec381de18.png)
+
 
