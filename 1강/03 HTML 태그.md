@@ -193,3 +193,85 @@ https://www.advancedwebranking.com/seo/html-study/
 우리는 모두 외우는 것이 아니라 어떤 태그를 사용할지 검색을 하여 선택할 수 있습니다.       
 검색을 두려워하지 맙시다.    
 
+# HTML 예제들
+
+예제 1: 간단한 웹페이지
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Simple Webpage</title>
+</head>
+<body>
+    <h1>Welcome to My Webpage</h1>
+    <p>This is a paragraph of text on my webpage.</p>
+    <a href="https://www.example.com">Visit Example.com</a>
+</body>
+</html>
+```
+
+예제 2: 이미지와 링크
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Webpage with Image and Link</title>
+</head>
+<body>
+    <h1>My Favorite Animal</h1>
+    <img src="https://www.example.com/cat.jpg" alt="A cute cat">
+    <p>For more cute cat pictures, visit <a href="https://www.example.com">Example.com</a>.</p>
+</body>
+</html>
+```
+
+예제 3: 순서가 있는 목록과 순서가 없는 목록
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lists Example</title>
+</head>
+<body>
+    <h1>Shopping List</h1>
+    <ul>
+        <li>Milk</li>
+        <li>Bread</li>
+        <li>Eggs</li>
+    </ul>
+
+    <h1>Steps to Bake a Cake</h1>
+    <ol>
+        <li>Preheat the oven</li>
+        <li>Mix ingredients</li>
+        <li>Pour into pan</li>
+        <li>Bake for 30 minutes</li>
+    </ol>
+</body>
+</html>
+```
+
+예제 4: 기본적인 폼
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Form</title>
+</head>
+<body>
+    <h1>Contact Us</h1>
+    <form action="/submit" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <br>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message"></textarea>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+```
