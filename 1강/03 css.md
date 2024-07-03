@@ -63,6 +63,7 @@ body {
 }
 
 2. 글꼴 (Font)
+
 글꼴 종류: font-family
 ```css
 p {
@@ -85,6 +86,7 @@ p {
 ```
 
 3. 텍스트 정렬 (Text Alignment)
+
 텍스트 정렬: text-align
 ```css
 h1 {
@@ -93,6 +95,7 @@ h1 {
 ```
 
 4. 여백 (Margin and Padding)
+
 바깥 여백: margin
 ```css
 p {
@@ -108,6 +111,7 @@ div {
 ```
 
 5. 테두리 (Border)
+
 테두리 스타일: border
 ```css
 p {
@@ -116,6 +120,7 @@ p {
 ```
 
 6. 크기 (Width and Height)
+
 넓이: width
 ```css
 div {
