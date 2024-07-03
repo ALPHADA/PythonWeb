@@ -49,13 +49,15 @@ HTML 문서는 보통 다음과 같은 기본 구조를 가지고 있습니다.
 ```
 
 4. 이미지 태그 (<img>)
-이미지를 삽입하는 태그야. src 속성을 사용해 이미지 파일의 경로를 지정합니다.
+이미지를 삽입하는 태그입니다. src 속성을 사용해 이미지 파일의 경로를 지정합니다.
+
 ```html
 <img src="path/to/image.jpg" alt="Description of Image">
 ```
 
 5. 목록 태그
-순서가 없는 목록 (<ul> 와 <li>)
+순서가 없는 목록 (`<ul>` 와 `<li>`)
+
 ```html
 <ul>
     <li>Item 1</li>
@@ -63,7 +65,8 @@ HTML 문서는 보통 다음과 같은 기본 구조를 가지고 있습니다.
     <li>Item 3</li>
 </ul>
 ```
-순서가 있는 목록 (<ol> 와 <li>)
+
+순서가 있는 목록 (`<ol>` 와 `<li>`)
 ```html
 <ol>
     <li>First item</li>
@@ -72,7 +75,7 @@ HTML 문서는 보통 다음과 같은 기본 구조를 가지고 있습니다.
 </ol>
 ```
 
-6. 테이블 태그 (<table>, <tr>, <td>, <th>)
+6. 테이블 태그 (`<table>`, `<tr>`, `<td>`, `<th>`)
 표를 만드는 태그입니다.
 ```html
 <table>
@@ -91,7 +94,7 @@ HTML 문서는 보통 다음과 같은 기본 구조를 가지고 있습니다.
 </table>
 ```
 
-7. 폼 태그 (<form>, <input>, <button>, <textarea>)
+7. 폼 태그 (`<form>`, `<input>`, `<button>`, `<textarea>`)
 사용자 입력을 받는 폼을 만드는 태그입니다.
 ```html
 <form action="/submit" method="post">
