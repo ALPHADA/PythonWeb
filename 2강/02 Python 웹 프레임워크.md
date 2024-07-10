@@ -39,7 +39,7 @@ pip install Flask
 
 app.py 파일을 생성하고 다음 코드를 작성하세요.    
 
-```
+```python
 from flask import Flask
 
 app = Flask(__name__)
@@ -80,7 +80,7 @@ my_blog/
 
 ### 2. Flask 애플리케이션 코드 작성
 app.py:
-```
+```python
 from flask import Flask, render_template
 
 app = Flask(__name__)
