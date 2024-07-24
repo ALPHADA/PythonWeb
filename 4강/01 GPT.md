@@ -4,7 +4,7 @@ ChatGPT API를 활용하여 웹사이트를 제작해봅시다.
 
 #### OpenAI API Key 설정
 먼저, OpenAI API 키가 필요합니다.     
-OpenAI에서 계정을 생성하고 API 키를 발급받으세요.
+[OpenAI](https://platform.openai.com/signup/)에서 계정을 생성하고 API 키를 발급받으세요.
 
 #### 프로젝트 구조 설정
 프로젝트 디렉토리 구조는 다음과 같습니다:
