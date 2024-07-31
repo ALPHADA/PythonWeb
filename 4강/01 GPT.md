@@ -72,10 +72,12 @@ app.py
 ```
 ```python
 from flask import Flask, render_template, request, jsonify
-import openai
+from openai import OpenAI
 
 app = Flask(__name__)
-openai.api_key = 'YOUR_OPENAI_API_KEY'  # 실제 API 키를 입력하세요.
+client = OpenAI(
+    api_key="@@@"
+)
 
 @app.route('/')
 def index():
@@ -90,12 +92,15 @@ def ask():
         return jsonify({'error': 'No question provided'}), 400
 
     try:
-        response = openai.Completion.create(
-            engine="text-davinci-003",
-            prompt=question,
-            max_tokens=150
+
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo", #"gpt-4o-mini",
+            messages=[
+                {"role": "user", "content": question}
+            ]
         )
-        answer = response.choices[0].text.strip()
+        answer = response.choices[0].message.content
+        print(answer)
         return jsonify({'answer': answer})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
