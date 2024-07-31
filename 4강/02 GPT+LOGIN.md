@@ -111,7 +111,6 @@ def download_story():
 
 @app.route('/')
 def home():
-    print('!!!!!')
     return render_template('index.html')
 
 @app.route('/dashboard')
