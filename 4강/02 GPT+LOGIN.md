@@ -5,6 +5,173 @@
 문학 작품 생성기는 사용자가 입력한 주제 또는 키워드를 바탕으로 GPT 모델을 활용해 짧은 이야기, 시, 또는 에세이를 생성하는 웹 애플리케이션입니다.      
 사용자는 입력한 내용과 관련된 이야기를 웹 페이지에서 바로 볼 수 있습니다.
 
+```
+from flask import Flask, render_template, request
+from openai import OpenAI
+
+app = Flask(__name__)
+
+client = OpenAI(
+    api_key="@@@"
+)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/generate', methods=['POST'])
+def generate_story():
+    # 사용자가 입력한 주제를 가져옴
+    topic = request.form['topic']
+
+    # GPT API 요청을 위한 메시지 설정
+    messages = [
+        {'role': 'system', 'content': '당신은 창의적인 이야기 작가입니다. 주어진 주제에 따라 이야기를 생성하세요.'},
+        {'role': 'user', 'content': f'주제: {topic}'}
+    ]
+
+    # GPT API 호출
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=messages
+    )
+
+    # 응답에서 이야기 추출
+    story = response['choices'][0]['message']['content']
+
+    return render_template('result.html', topic=topic, story=story)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+```
+
+index.html
+```
+<!DOCTYPE html>
+<html>
+<head>
+    <title>문학 작품 생성기</title>
+</head>
+<body>
+    <h1>문학 작품 생성기</h1>
+    <form action="/generate" method="post">
+        <label for="topic">주제 입력:</label>
+        <input type="text" id="topic" name="topic" required>
+        <input type="submit" value="생성">
+    </form>
+</body>
+</html>
+```
+result.html
+```
+<!DOCTYPE html>
+<html>
+<head>
+    <title>문학 작품 생성기</title>
+</head>
+<body>
+    <h1>문학 작품 생성기</h1>
+    <h2>주제: {{ topic }}</h2>
+    <p>{{ story }}</p>
+    <a href="/">다시 생성하기</a>
+</body>
+</html>
+
+```
+
+### 발전된 기능
+- 장르 선택: 사용자가 생성할 이야기의 장르를 선택할 수 있게 합니다. 예: 판타지, 공포, 로맨스 등.
+- 이야기 길이 조절: 사용자가 이야기의 길이(짧은 이야기, 중간 이야기, 긴 이야기)를 선택할 수 있게 합니다.
+- 캐릭터 추가: 사용자 정의 캐릭터를 추가하여 이야기에서 등장시킬 수 있게 합니다.
+- 다양한 형식 지원: 이야기 외에도 시, 수필 등의 형식 선택 가능.
+- 이야기 저장 및 공유: 생성된 이야기를 PDF로 저장하거나 소셜 미디어에서 공유할 수 있게 합니다.
+
+app.py
+```python
+from flask import Flask, render_template, request, send_file
+from openai import OpenAI
+import os
+from fpdf import FPDF
+
+app = Flask(__name__)
+
+client = OpenAI(
+    api_key="@@@"
+)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/generate', methods=['POST'])
+def generate_story():
+    # 사용자 입력 정보 가져오기
+    topic = request.form['topic']
+    genre = request.form['genre']
+    length = request.form['length']
+    character = request.form.get('character', '')
+
+    # GPT API 요청을 위한 메시지 설정
+    system_message = f"당신은 창의적인 이야기 작가입니다. 주어진 장르와 길이에 맞춰 이야기를 생성하세요. 장르: {genre}, 길이: {length}."
+    user_message = f"주제: {topic}, 캐릭터: {character}"
+
+    messages = [
+        {'role': 'system', 'content': system_message},
+        {'role': 'user', 'content': user_message}
+    ]
+
+    # GPT API 호출
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=messages
+    )
+
+    # 응답에서 이야기 추출
+    story = response['choices'][0]['message']['content']
+
+    # 이야기 저장을 위한 세션 변수 설정
+    session['story'] = story
+
+    return render_template('result.html', topic=topic, story=story)
+
+@app.route('/download')
+def download_story():
+    story = session.get('story', '')
+
+    # PDF 생성
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_auto_page_break(auto=True, margin=15)
+    pdf.set_font("Arial", size=12)
+    pdf.multi_cell(0, 10, story)
+
+    pdf_path = os.path.join("static", "story.pdf")
+    pdf.output(pdf_path)
+
+    return send_file(pdf_path, as_attachment=True)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+result.html
+```
+<!DOCTYPE html>
+<html>
+<head>
+    <title>문학 작품 생성기</title>
+</head>
+<body>
+    <h1>문학 작품 생성기</h1>
+    <h2>주제: {{ topic }}</h2>
+    <p>{{ story }}</p>
+    <a href="/download">이야기 다운로드 (PDF)</a>
+    <a href="/">다시 생성하기</a>
+</body>
+</html>
+```
+
+### login
 app.py
 ```python
 # pip install -U Flask-SQLAlchemy
@@ -18,7 +185,7 @@ from openai import OpenAI
 from fpdf import FPDF
 
 client = OpenAI(
-    api_key="sk-None-HtU4UtphtUSElr4uS5voT3BlbkFJAHEeVB60kWvtjmebeTHS"
+    api_key="@@@"
 )
 
 app = Flask(__name__)
