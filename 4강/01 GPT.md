@@ -22,6 +22,7 @@ Python에서는 requests 라이브러리를 사용하여 API를 호출할 수 �
 사전 준비
 Python 설치: Python 공식 웹사이트에서 Python을 다운로드하고 설치합니다.
 requests 라이브러리 설치: 터미널(또는 명령 프롬프트)을 열고 다음 명령어를 입력하여 requests 라이브러리를 설치합니다.
+```
 ```sh
 pip install requests
 ```
@@ -40,17 +41,20 @@ openai.api_key = 'YOUR_OPENAI_API_KEY'
 - 다음은 OpenAI API를 사용하여 ChatGPT 모델을 호출하는 예제입니다.
 
 ```python
-import openai
-
-openai.api_key = 'YOUR_OPENAI_API_KEY'
-
-response = openai.Completion.create(
-    engine="text-davinci-003",  # 또는 "gpt-4" 등 사용하고자 하는 모델
-    prompt="Hello, how are you?",
-    max_tokens=150
+from openai import OpenAI
+client = OpenAI(
+    api_key="@@@"
 )
 
-print(response.choices[0].text.strip())
+completion = client.chat.completions.create(
+  model="gpt-4o-mini",
+  messages=[
+    {"role": "system", "content": "You are my english teacher."},
+    {"role": "user", "content": "Hello, how are you?"}
+  ]
+)
+
+print(completion.choices[0].message)
 ```
 
 #### Flask를 사용한 간단한 웹 애플리케이션 예제
@@ -257,10 +261,12 @@ app.py
 
 ```python
 from flask import Flask, render_template, request, jsonify
-import openai
+from openai import OpenAI
 
 app = Flask(__name__)
-openai.api_key = 'YOUR_OPENAI_API_KEY'  # 여기 YOUR_OPENAI_API_KEY 부분에 실제 API 키를 입력하세요.
+client = OpenAI(
+    api_key="@@@"
+)
 
 @app.route('/')
 def index():
@@ -275,12 +281,15 @@ def ask():
         return jsonify({'error': 'No question provided'}), 400
 
     try:
-        response = openai.Completion.create(
-            engine="text-davinci-003",
-            prompt=question,
-            max_tokens=150
+
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo", #"gpt-4o-mini",
+            messages=[
+                {"role": "user", "content": question}
+            ]
         )
-        answer = response.choices[0].text.strip()
+        answer = response.choices[0].message.content
+        print(answer)
         return jsonify({'answer': answer})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
