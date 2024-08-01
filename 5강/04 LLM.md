@@ -191,3 +191,9 @@ def predict_next_word(seed_text, next_words=1):
 print(predict_next_word("The quick brown", next_words=3))  # "The quick brown" 다음에 올 세 단어 예측
 
 ```
+주요 설명
+- TextVectorization: 텍스트 데이터를 정수 인덱스로 변환하는 레이어로, 모델이 텍스트를 이해할 수 있도록 도와줍니다. adapt 메서드로 어휘 사전을 학습하고, get_vocabulary로 인덱스-단어 매핑을 얻습니다.
+- Embedding: 단어를 밀집된 벡터로 변환하는 레이어로, 각 단어를 실수 벡터로 표현하여 단어 간의 유사성을 학습할 수 있게 합니다.
+- LSTM (Long Short-Term Memory): 시퀀스 데이터에서 중요한 패턴을 학습하는 데 유용한 순환 신경망의 일종으로, 과거 정보를 기억하고 필요한 정보를 전달하는 역할을 합니다.
+- Dense (소프트맥스 활성화 함수): 다중 클래스 분류를 위해 각 클래스의 확률을 출력하며, 총합이 1이 되도록 합니다.
+- predict_next_word: 주어진 시드 텍스트를 기반으로 다음 단어를 예측하는 함수입니다. TextVectorization을 통해 시드 텍스트를 정수 인덱스로 변환하고, 모델을 통해 다음 단어의 인덱스를 예측합니다. 예측된 단어는 시드 텍스트에 추가됩니다.
